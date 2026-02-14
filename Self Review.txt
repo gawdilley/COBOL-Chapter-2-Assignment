@@ -1,0 +1,7 @@
+Self Review
+
+I think the assignment went fairly well in my eyes. I was able to copy over from the Util1000 properly and make adjustments as needed. I originally added a few things
+that were not needed to be added, but I was able to revert those errors. I was stuck getting just the Customer C to print out until I realized that I was overwriting the
+same variables over and over leading to it just printing out the last customer. So, I took the PERFORM 600 and put it below each time I rewrote over the old one. Which in turn
+allowed for me to print out each display. In the future I would hope to be able to loop through each one instead of just doing a PERFORM at the bottom, but my skills did not
+allow for me to do such a thing yet. 
