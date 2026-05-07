@@ -1,78 +1,53 @@
-# UTIL2000 - Tiered Electric Utility Billing Program
+# UTIL2000 – Tiered Electric Utility Billing Program
 
-## 📌 Overview
-**UTIL2000** is a COBOL utility billing program that calculates and displays electric bills for three predefined customers.  
-The program uses a tiered kilowatt-hour (kWh) rate system and adds a fixed service fee to produce the final bill total.
-
-This project was created as part of a COBOL Chapter 2 assignment to demonstrate foundational COBOL programming concepts such as structured program flow, arithmetic calculations, and formatted output.
+**Course:** COBOL Programming – Chapter 2 Assignment
+**Author:** [Gabe Dilley](https://github.com/gawdilley)
+**GitHub:** [COBOL-Chapter-2-Assignment](https://github.com/gawdilley/COBOL-Chapter-2-Assignment)
 
 ---
 
-## 🛠️ What the Program Does
-The program performs the following steps:
+## Description
 
-1. **Displays a program heading**
-   - Prints a title header to the terminal output.
-
-2. **Loads customer billing information**
-   - Customer name
-   - kWh usage amount
-   - Service fee
-
-3. **Calculates tiered kWh usage**
-   The program separates total kWh usage into three possible tiers:
-   - **Tier 1:** First 500 kWh
-   - **Tier 2:** Next 500 kWh (kWh 501–1000)
-   - **Tier 3:** Any usage above 1000 kWh
-
-4. **Calculates charges per tier**
-   The program applies billing rates based on the tier rules:
-   - Tier 1 rate = $0.12 per kWh
-   - Tier 2 rate = $0.15 per kWh
-   - Tier 3 rate = $0.18 per kWh
-
-5. **Computes subtotal and final bill total**
-   - Subtotal = Tier 1 charge + Tier 2 charge + Tier 3 charge
-   - Total bill = Subtotal + Service fee
-
-6. **Displays a formatted bill for each customer**
-   The program prints a complete bill breakdown showing:
-   - Customer name
-   - kWh used
-   - Service fee
-   - Tier 1 charge
-   - Tier 2 charge
-   - Tier 3 charge
-   - Total bill
+UTIL2000 is a COBOL program that calculates and displays electric bills for three predefined customers using a tiered kilowatt-hour (kWh) rate system. A fixed service fee is added to each bill to produce the final total. The program demonstrates foundational COBOL concepts including structured program flow, arithmetic calculations, and formatted output.
 
 ---
 
-## 💡 Billing Rules
-The program uses the following billing tiers:
+## What the Program Does
 
-| Tier | kWh Range       | Rate ($/kWh) |
-|------|-----------------|--------------|
-| 1    | 0 - 500         | $0.12        |
-| 2    | 501 - 1000      | $0.15        |
-| 3    | 1001 and above  | $0.18        |
+### Input
+The program uses three hardcoded customers, each with a predefined name and kWh usage:
 
-A fixed **service fee of $14.95** is added to every customer bill.
+| Customer | kWh Used |
+|----------|----------|
+| CUST-ALPHA | 350 kWh |
+| CUST-BRAVO | 925 kWh |
+| CUST-CHARLIE | 1,350 kWh |
+
+### Processing
+The program performs the following steps for each customer:
+
+1. **Loads** the customer name, kWh usage, and fixed service fee (`$14.95`) into working storage.
+2. **Separates** total kWh usage into up to three billing tiers:
+   - **Tier 1** — first 500 kWh at `$0.12/kWh`
+   - **Tier 2** — next 500 kWh (501–1000) at `$0.15/kWh`
+   - **Tier 3** — any usage above 1,000 kWh at `$0.18/kWh`
+3. **Calculates** the charge for each applicable tier.
+4. **Computes** the subtotal (sum of all tier charges) and adds the service fee to produce the final bill total.
+5. **Displays** a formatted bill to the terminal for each customer.
+
+### Output
+For each customer the program prints:
+- Customer name
+- kWh used
+- Service fee
+- Tier 1, 2, and 3 charges
+- Total bill amount
 
 ---
 
-## 📌 Customers Included
-The program processes these three predefined customers:
+## Example Output
 
-- **CUST-ALPHA** (350 kWh)
-- **CUST-BRAVO** (925 kWh)
-- **CUST-CHARLIE** (1350 kWh)
-
----
-
-## 🖥️ Example Output
-When the program runs, it prints a formatted report similar to the following:
-
-```text
+```
 ********************************
 *** UTIL2000 - CUSTOMER BILL ***
 ********************************
@@ -80,11 +55,11 @@ When the program runs, it prints a formatted report similar to the following:
 --------------------------------
 CUSTOMER: CUST-ALPHA
 --------------------------------
-KWH USED       : 350
+KWH USED       :   350
 SERVICE FEE    : $14.95
 TIER 1 CHARGE  : $42.00
-TIER 2 CHARGE  : $0.00
-TIER 3 CHARGE  : $0.00
+TIER 2 CHARGE  :  $0.00
+TIER 3 CHARGE  :  $0.00
 --------------------------------
 TOTAL BILL     : $56.95
 --------------------------------
@@ -92,11 +67,11 @@ TOTAL BILL     : $56.95
 --------------------------------
 CUSTOMER: CUST-BRAVO
 --------------------------------
-KWH USED       : 925
+KWH USED       :   925
 SERVICE FEE    : $14.95
 TIER 1 CHARGE  : $60.00
 TIER 2 CHARGE  : $63.75
-TIER 3 CHARGE  : $0.00
+TIER 3 CHARGE  :  $0.00
 --------------------------------
 TOTAL BILL     : $138.70
 --------------------------------
@@ -114,6 +89,21 @@ TOTAL BILL     : $212.95
 --------------------------------
 ```
 
-## 👤 Author
-**Gabriel Dilley**
-- GitHub: [gawdilley](https://github.com/gawdilley)
+---
+
+## New Concepts Used
+
+- **Tiered conditional logic** — using nested `IF` statements to determine how much of a customer's kWh usage falls into each billing tier before applying the corresponding rate
+- **Hardcoded data initialization** — loading predefined customer values directly into working-storage fields using `MOVE` statements rather than reading from an input file
+- **Multi-step arithmetic** — breaking a billing calculation into distinct steps (tier charges → subtotal → total) using separate `COMPUTE` and `ADD` statements for clarity
+- **`PERFORM` for reusable paragraphs** — calling a shared calculation and display paragraph once per customer rather than repeating the logic three times
+- **Formatted numeric output** — using edited PIC clauses with `$`, commas, and decimal points to produce readable currency output on the terminal
+- **`DISPLAY` for terminal output** — printing formatted bill lines directly to the screen rather than writing to an output file
+
+---
+
+## Authors
+
+| Name | Profile |
+|------|---------|
+| Gabe Dilley | [GitHub](https://github.com/gawdilley) |
